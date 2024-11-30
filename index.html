@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athena Learning Platform</title>
+
+    <!-- Include CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+
+<body>
+    <!-- Main container for the application -->
+    <div class="container" id="app">
+
+        <!-- Login Form -->
+        <div id="loginForm" class="card">
+            <div class="login-container">
+                <!-- Login Form Section -->
+                <div class="login-form">
+                    <!-- Application title with 'Athena' in blue -->
+                    <h2 style="margin-bottom: 20px;"><span class="athena-blue">Athena</span> Learning Platform</h2>
+                    <!-- Error message display -->
+                    <div id="loginError" class="error-message"></div>
+                    <!-- Username input -->
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter username">
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter password">
+                    </div>
+                    <!-- Login button -->
+                    <button class="btn" id="loginButton">Login</button>
+                    <!-- Toggle to Register -->
+                    <p class="toggle-link">Don't have an account? <span id="showRegister">Register here</span></p>
+                </div>
+                <!-- Quote Section -->
+                <div class="login-quote">
+                    <img src="assets/images/default_author.jpg" alt="Author Image" class="quote-image" id="quoteImage">
+                    <div class="quote fade-in-out" id="loginQuote"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="registerForm" class="card hidden">
+            <div class="login-container">
+                <!-- Registration Form Section -->
+                <div class="login-form">
+                    <h2 style="margin-bottom: 20px;"><span class="athena-blue">Athena</span> Register</h2>
+                    <!-- Error message display -->
+                    <div id="registerError" class="error-message"></div>
+                    <!-- Username input -->
+                    <div class="form-group">
+                        <label for="reg_username">Username</label>
+                        <input type="text" id="reg_username" placeholder="Enter username">
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <label for="reg_password">Password</label>
+                        <input type="password" id="reg_password" placeholder="Enter password">
+                    </div>
+                    <!-- Role selection -->
+                    <div class="form-group">
+                        <label for="reg_role">Role</label>
+                        <select id="reg_role">
+                            <option value="">Select Role</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                    <!-- Register button -->
+                    <button class="btn" id="registerButton">Register</button>
+                    <!-- Toggle to Login -->
+                    <p class="toggle-link">Already have an account? <span id="showLogin">Login here</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard -->
+        <div id="teacherDashboard" class="hidden">
+            <!-- Header with dashboard title and logout button -->
+            <div class="header">
+                <h2><span class="athena-blue">Athena</span> Teacher Dashboard</h2>
+                <button class="btn btn-secondary" id="logoutTeacher">Logout</button>
+            </div>
+            <!-- Navigation for Teacher -->
+            <div class="nav">
+                <div class="nav-item active" data-section="createAssignment">Create Assignment</div>
+                <div class="nav-item" data-section="viewAssignments">View Assignments</div>
+                <div class="nav-item" data-section="studentSubmissions">Student Submissions</div>
+                <div class="nav-item" data-section="classAverages">Class Averages</div>
+                <div class="nav-item" data-section="inputExamResults">Input Exam Results</div>
+            </div>
+            <!-- Teacher Content Area -->
+            <div id="teacherContent">
+                <!-- Create Assignment Section -->
+                <div id="createAssignmentSection" class="form-group">
+                    <h3>Create Assignment</h3>
+                    <label for="assignmentType">Assignment Type</label>
+                    <select id="assignmentType">
+                        <option value="project">Project Assignment</option>
+                        <option value="quickfire">Quickfire Questions</option>
+                    </select>
+
+                    <!-- Skills Selection for Project Assignment -->
+                    <div id="skillsSelection" class="form-group">
+                        <label>Select Skills for Project</label>
+                        <div id="skillsList" class="skills-list">
+                            <span class="badge" id="CriticalThinking" onclick="toggleSkill('CriticalThinking')">Critical Thinking</span>
+                            <span class="badge" id="CreativeWriting" onclick="toggleSkill('CreativeWriting')">Creative Writing</span>
+                            <span class="badge" id="Research" onclick="toggleSkill('Research')">Research</span>
+                            <span class="badge" id="PublicSpeaking" onclick="toggleSkill('PublicSpeaking')">Public Speaking</span>
+                            <span class="badge" id="ProblemSolving" onclick="toggleSkill('ProblemSolving')">Problem Solving</span>
+                        </div>
+                    </div>
+
+                    <button id="createAssignmentButton" class="btn">Create Assignment</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Dashboard -->
+        <div id="studentDashboard" class="hidden">
+            <!-- Header with dashboard title and logout button -->
+            <div class="header">
+                <h2><span class="athena-blue">Athena</span> Student Dashboard</h2>
+                <button class="btn btn-secondary" id="logoutStudent">Logout</button>
+            </div>
+            <!-- Navigation for Student -->
+            <div class="nav">
+                <div class="nav-item active" data-section="viewAssignments">Your Assignments</div>
+                <div class="nav-item" data-section="mySubmissions">My Submissions</div>
+                <div class="nav-item" data-section="averageGrade">Average Grade</div>
+                <div class="nav-item" data-section="inputExamResults">Input Exam Results</div>
+            </div>
+            <!-- Student Content Area -->
+            <div id="studentContent">
+                <!-- Content gets loaded dynamically by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Quickfire Questions -->
+    <div class="modal" id="quickfireModal">
+        <div class="modal-content">
+            <span class="close-button" id="closeQuickfireModal" onclick="closeModal('quickfireModal')">&times;</span>
+            <h3>Quickfire Questions</h3>
+            <form id="quickfireForm">
+                <div id="questionsContainer"></div>
+                <button type="submit" class="btn">Submit Answers</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Project Prompts -->
+    <div class="modal" id="projectPromptModal">
+        <div class="modal-content">
+            <span class="close-button" id="closeProjectPromptModal" onclick="closeModal('projectPromptModal')">&times;</span>
+            <h3>Select a Prompt</h3>
+            <div id="promptOptionsContainer"></div>
+            <button class="btn" id="submitProjectPrompt" disabled>Submit Prompt</button>
+        </div>
+    </div>
+
+    <!-- Modal for Entering Topic -->
+    <div class="modal" id="projectTopicModal">
+        <div class="modal-content">
+            <span class="close-button" id="closeProjectTopicModal">&times;</span>
+            <h3>Enter a Topic</h3>
+            <form id="projectTopicForm">
+                <div class="form-group">
+                    <label for="projectTopicInput">Topic:</label>
+                    <input type="text" id="projectTopicInput" placeholder="Enter your topic here..." required>
+                </div>
+                <!-- Generate Prompts Button -->
+                <button type="button" class="btn" id="generatePromptBtn" disabled>Generate Prompts</button>
+            </form>
+        </div>
+    </div>
+
+        <!-- Modal for Entering Topic -->
+    <div class="modal" id="projectTopicModal">
+        <div class="modal-content">
+            <span class="close-button" id="closeProjectTopicModal">&times;</span>
+            <h3>Enter a Topic</h3>
+            <form id="projectTopicForm">
+                <div class="form-group">
+                    <label for="projectTopicInput">Topic:</label>
+                    <input type="text" id="projectTopicInput" placeholder="Enter your topic here..." required>
+                </div>
+                <!-- Generate Prompts Button -->
+                <button type="button" class="btn" id="generatePromptBtn" disabled>Generate Prompts</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Displaying Project Ideas -->
+    <div class="modal" id="projectPromptModal">
+        <div class="modal-content">
+            <span class="close-button" id="closeProjectPromptModal">&times;</span>
+            <h3>Project Ideas</h3>
+            <div id="projectIdeasContainer">
+                <!-- Project ideas will be dynamically displayed here -->
+            </div>
+            <button class="btn" id="submitProjectPrompt">Submit Project</button>
+        </div>
+    </div>
+
+
+    <!-- Include JavaScript Files -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/teacher-dashboard.js"></script>
+    <script src="assets/js/student-dashboard.js"></script>
+    <script src="assets/js/modals.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/utils.js"></script>
+</body>
+
+</html>

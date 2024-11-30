@@ -1,0 +1,78 @@
+CHANGE LOG
+
+Updated Button Handling:
+
+The "Generate Prompts" button was changed from type="submit" to type="button" to prevent form submission and avoid page reload.
+This change was made to ensure that clicking the button triggers the JavaScript function correctly, without causing the form to submit.
+Input Handling for Topic:
+
+Added logic to enable/disable the "Generate Prompts" button based on whether the user has entered text in the input field (#projectTopicInput).
+A keyup event listener was added to monitor the input field and enable the button only when valid text is present.
+Prompt Generation Logic:
+
+Implemented the generatePromptOptions() function to dynamically generate a list of prompts based on the topic entered by the user. This is working as expected and displays relevant prompts to the user.
+The prompts are being generated dynamically in the modal after the user enters a topic (e.g., "climate change").
+Modal Handling:
+
+The modals are shown and hidden properly when the user clicks on the "Generate Prompts" button or the close buttons (×).
+Added logic to prevent form submission and trigger the modal display only when a valid topic is entered.
+The modal correctly displays the "Generate Prompts" button, and the button is enabled when valid input is entered.
+Radio Buttons for Prompt Selection:
+
+Once the prompts are generated, the user can select one of the prompts using radio buttons. This logic is functioning as expected.
+The "Submit Prompt" button is disabled until a prompt is selected.
+Project Ideas Generation:
+
+Based on the selected prompt, the system should generate three project ideas related to that prompt.
+The generateProjectIdeas() function is designed to return a set of three project ideas based on the selected prompt (for example, for "climate change", it generates ideas like "Research migration patterns" or "Create a policy proposal").
+Display Project Ideas:
+
+The project ideas are displayed in the modal (#projectPromptModal) after the prompt is selected.
+The displayProjectIdeas() function dynamically generates HTML for the project ideas and injects it into the page.
+Form and Button Event Handling:
+
+Prevented default form submission behavior using event.preventDefault() to stop the page from reloading.
+Added appropriate event listeners for enabling the "Generate Prompts" button, handling form submission, and displaying the project ideas.
+Known Issues/Progress:
+Current Issue: "Generate Prompts" Button and Project Ideas Modal:
+
+Although the button is working and enabling/disabling correctly based on user input, the "Generate Prompts" button is still not triggering the expected behavior in some cases.
+Project ideas are not being displayed correctly after a prompt is selected. The prompt generation logic is functioning, but the project ideas based on the selected prompt are not being rendered as expected.
+Prompt and Project Ideas Generation:
+
+The generatePromptOptions() function works as expected, but the system might be having trouble displaying three project ideas based on the selected prompt. The logic for generating project ideas is present, but there might be an issue with modal display or how project ideas are populated dynamically.
+Modal Visibility:
+
+The modals appear and disappear as expected when the user clicks the close buttons. However, there may be an issue with the "Submit Prompt" button not being enabled when the prompt is selected. This issue could be affecting the transition from selecting a prompt to generating project ideas.
+Changes Not Implemented Yet:
+Debugging and Final Fixes:
+While progress has been made, further debugging is needed to ensure that three project ideas are generated correctly and displayed in the modal.
+Check the logic flow around modal state changes (showing/hiding) and button enablement after selecting a prompt.
+Testing and Debugging:
+Console Logging:
+
+I added console.log() statements throughout the code to help debug the following:
+User input (topic entered by the student).
+Prompt options generated for the entered topic.
+Prompt selection and whether it triggers the project ideas generation.
+Project ideas being generated based on the selected prompt.
+Testing Functions:
+
+I created a tests.js file with console log tests for verifying the following:
+Whether the input is captured correctly.
+Whether the "Generate Prompts" button is enabled/disabled correctly.
+Whether prompts are being generated and displayed.
+Whether project ideas are being generated based on the selected prompt.
+Next Steps:
+Further Debugging:
+The next steps involve investigating the modal display logic and fixing the issue with generating and displaying project ideas.
+You can run the tests.js file to verify the event flow and ensure all steps are working correctly.
+Project Ideas Rendering:
+Verify if the generated project ideas are being injected into the page correctly and check the HTML structure to ensure that everything is rendered.
+Submit Prompt Behavior:
+Double-check that the "Submit Prompt" button is enabled and working as expected when a prompt is selected.
+Modal Management:
+Review how the modals are being hidden and displayed (check modal.style.display).
+Conclusion:
+The logic for prompt generation and project idea generation is in place but still requires some fine-tuning. The modals are showing and closing correctly, but further testing and debugging are required to ensure the "Generate Prompts" button and project ideas are displayed as intended.
+The next steps for your team should be focused on fixing the project ideas rendering and ensuring proper modal handling.
