@@ -81,6 +81,7 @@ Once the platform is loaded in your browser, you will be presented with a login 
 
 Login Process
 Login: If you are a teacher or student, log in using your credentials.
+For the sake of this Demo, we have test credentials (teacher1, pass123) (student1, pass123)
 Register: If you do not have an account, you can register a new account by clicking the "Register here" link on the login page.
 Teacher Dashboard:
 After logging in as a teacher, you will be directed to the teacher dashboard, where you can create assignments, view student submissions, and monitor class performance.
