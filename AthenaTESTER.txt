@@ -1,3 +1,10 @@
+This is a version of Athena which was distributed to students and teachers during our testing phase to gather feedback, which was incredibly positive. 
+This file can be copied into a .html file and will work with full intended functionality, this easy process allowed us to quickly get feedback with people
+who perhaps weren't very 'savvy' with computers.
+
+This is the best way to quickly test Athena and is regularly updated with any changes, just copy and paste into a .html file to test!
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
